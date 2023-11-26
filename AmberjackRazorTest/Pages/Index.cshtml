@@ -4,3 +4,66 @@
     ViewData["Title"] = "";
 }
 
+@if (ViewData["greeting"] != null)
+{
+    <h3>@ViewData["greeting"]</h3>
+    <h6>Qualifications</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var grade in Model.Grades)
+        {
+            <tr>
+                <td>@grade.Name</td>
+                <td>@grade.Grade</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <select asp-for="Title" class="form-select" asp-items="Html.GetEnumSelectList(typeof (IndexModel.Titles))"></select>
+            <span asp-validation-for="Title" class="text-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="FirstName" class="form-label"></label>
+            <input asp-for="FirstName" type="text" class="form-control">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="LastName" class="form-label"></label>
+            <input asp-for="LastName" type="text" class="form-control">
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" type="email" class="form-control">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                Qualifications
+            </div>
+            <div id="qualifictions" class="card-body">
+            </div>
+            <div class="card-footer text-muted">
+                <button type="button" id="addQualification" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </form>
+}
